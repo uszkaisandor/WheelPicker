@@ -65,7 +65,7 @@ public class WheelDatePicker extends LinearLayout implements WheelPicker.OnItemS
         mDay = mPickerDay.getCurrentDay();
     }
 
-    private void setMonthNames(String[] months) {
+    void setMonthNames(String[] months) {
         this.months = months;
     }
 
