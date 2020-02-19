@@ -17,12 +17,15 @@
         android:layout_marginLeft="@dimen/WheelMargins"
         android:layout_marginRight="@dimen/WheelMargins"
         android:text="@string/Year"
-        android:textColor="#536D8A" />
+        android:textColor="#536D8A"
+        android:visibility="gone" />
 
     <com.aigestudio.wheelpicker.widgets.WheelMonthPicker
         android:id="@+id/wheel_date_picker_month"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:layout_weight=".5" />
 
     <TextView
@@ -32,7 +35,8 @@
         android:layout_marginLeft="@dimen/WheelMargins"
         android:layout_marginRight="@dimen/WheelMargins"
         android:text="@string/Month"
-        android:textColor="#536D8A" />
+        android:textColor="#536D8A"
+        android:visibility="gone" />
 
     <com.aigestudio.wheelpicker.widgets.WheelDayPicker
         android:id="@+id/wheel_date_picker_day"
@@ -45,5 +49,6 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/WheelMargins"
         android:text="@string/Day"
-        android:textColor="#536D8A" />
+        android:textColor="#536D8A"
+        android:visibility="gone" />
 </LinearLayout>

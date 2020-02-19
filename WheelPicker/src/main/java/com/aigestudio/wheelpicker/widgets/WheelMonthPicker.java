@@ -35,7 +35,7 @@ public class WheelMonthPicker extends WheelPicker implements IWheelMonthPicker {
         }
         super.setData(data);
 
-        mSelectedMonth = 1;
+        mSelectedMonth = 0;
         selectedMonthString = data.get(0);
         updateSelectedYear();
     }
@@ -45,8 +45,8 @@ public class WheelMonthPicker extends WheelPicker implements IWheelMonthPicker {
     }
 
     private void updateSelectedYear() {
-        setSelectedItemPosition(mSelectedMonth - 1);
-        selectedMonthString = data.get(0);
+        setSelectedItemPosition(mSelectedMonth);
+        selectedMonthString = data.get(mSelectedMonth);
     }
 
     @Override
