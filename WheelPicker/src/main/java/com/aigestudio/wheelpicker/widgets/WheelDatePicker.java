@@ -32,7 +32,7 @@ public class WheelDatePicker extends LinearLayout implements WheelPicker.OnItemS
 
     private TextView mTVYear, mTVMonth, mTVDay;
 
-    private String[] months;
+    private List<String> months;
 
     private int mYear, mMonth, mDay;
 
@@ -65,8 +65,9 @@ public class WheelDatePicker extends LinearLayout implements WheelPicker.OnItemS
         mDay = mPickerDay.getCurrentDay();
     }
 
-    public void setMonthNames(String[] months) {
+    public void setMonthNames(List<String> months) {
         this.months = months;
+        mPickerMonth.bind(months);
     }
 
     private void setMaximumWidthTextYear() {
@@ -88,7 +89,7 @@ public class WheelDatePicker extends LinearLayout implements WheelPicker.OnItemS
             mPickerDay.setMonth(mMonth);
         }
         mDay = mPickerDay.getCurrentDay();
-        String date = mYear + "-" + getMonthName(mMonth) + "-" + mDay;
+        String date = mYear + "-" + mMonth + "-" + mDay;
         if (null != mListener) try {
             mListener.onDateSelected(this, SDF.parse(date));
         } catch (ParseException e) {
@@ -97,7 +98,7 @@ public class WheelDatePicker extends LinearLayout implements WheelPicker.OnItemS
     }
 
     public String getMonthName(int month) {
-        return months[month];
+        return months.get(month);
     }
 
     @Override

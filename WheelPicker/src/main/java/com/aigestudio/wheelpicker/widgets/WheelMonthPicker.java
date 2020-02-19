@@ -5,8 +5,10 @@ import android.util.AttributeSet;
 
 import com.aigestudio.wheelpicker.WheelPicker;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -19,25 +21,32 @@ import java.util.List;
  */
 public class WheelMonthPicker extends WheelPicker implements IWheelMonthPicker {
     private int mSelectedMonth;
+    private String selectedMonthString;
+
+    List<String> data = new ArrayList<>();
 
     public WheelMonthPicker(Context context) {
         this(context, null);
     }
 
-    public WheelMonthPicker(Context context, AttributeSet attrs) {
-        super(context, attrs);
-
-        List<Integer> data = new ArrayList<>();
-        for (int i = 1; i <= 12; i++)
-            data.add(i);
+    public void bind(List<String> months) {
+        for (int i = 0; i < 12; i++) {
+            data.add(months.get(i));
+        }
         super.setData(data);
 
-        mSelectedMonth = Calendar.getInstance().get(Calendar.MONTH) + 1;
+        mSelectedMonth = 1;
+        selectedMonthString = data.get(0);
         updateSelectedYear();
+    }
+
+    public WheelMonthPicker(Context context, AttributeSet attrs) {
+        super(context, attrs);
     }
 
     private void updateSelectedYear() {
         setSelectedItemPosition(mSelectedMonth - 1);
+        selectedMonthString = data.get(0);
     }
 
     @Override
@@ -58,6 +67,6 @@ public class WheelMonthPicker extends WheelPicker implements IWheelMonthPicker {
 
     @Override
     public int getCurrentMonth() {
-        return Integer.valueOf(String.valueOf(getData().get(getCurrentItemPosition())));
+        return data.indexOf(selectedMonthString);
     }
 }
