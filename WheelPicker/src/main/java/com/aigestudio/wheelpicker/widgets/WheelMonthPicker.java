@@ -30,13 +30,13 @@ public class WheelMonthPicker extends WheelPicker implements IWheelMonthPicker {
     }
 
     public void bind(List<String> months) {
-        for (int i = 0; i < 12; i++) {
-            data.add(months.get(i));
+        for (int i = 1; i <= 12; i++) {
+            data.add(months.get(i - 1));
         }
         super.setData(data);
 
-        mSelectedMonth = 0;
-        selectedMonthString = data.get(0);
+        mSelectedMonth = Calendar.getInstance().get(Calendar.MONTH) + 1;
+        selectedMonthString = data.get(mSelectedMonth - 1);
         updateSelectedYear();
     }
 
