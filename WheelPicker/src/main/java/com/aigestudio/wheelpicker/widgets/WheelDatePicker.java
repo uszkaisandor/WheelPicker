@@ -11,18 +11,18 @@ import com.aigestudio.wheelpicker.IDebug;
 import com.aigestudio.wheelpicker.IWheelPicker;
 import com.aigestudio.wheelpicker.R;
 import com.aigestudio.wheelpicker.WheelPicker;
+import com.aigestudio.wheelpicker.model.YearMonthDay;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 public class WheelDatePicker extends LinearLayout implements WheelPicker.OnItemSelectedListener,
         IDebug, IWheelPicker, IWheelDatePicker, IWheelYearPicker, IWheelMonthPicker,
         IWheelDayPicker {
     private static final SimpleDateFormat SDF =
-            new SimpleDateFormat("yyyy-M-d", Locale.getDefault());
+            new SimpleDateFormat("yyyy-M-d");
 
     private WheelYearPicker mPickerYear;
     private WheelMonthPicker mPickerMonth;
@@ -90,10 +90,8 @@ public class WheelDatePicker extends LinearLayout implements WheelPicker.OnItemS
         }
         mDay = mPickerDay.getCurrentDay();
         String date = mYear + "-" + mMonth + "-" + mDay;
-        if (null != mListener) try {
-            mListener.onDateSelected(this, SDF.parse(date));
-        } catch (ParseException e) {
-            e.printStackTrace();
+        if (null != mListener) {
+            mListener.onDateSelected(this, new YearMonthDay(mYear, mMonth, mDay));
         }
     }
 
@@ -419,14 +417,8 @@ public class WheelDatePicker extends LinearLayout implements WheelPicker.OnItemS
     }
 
     @Override
-    public Date getCurrentDate() {
-        String date = mYear + "-" + mMonth + "-" + mDay;
-        try {
-            return SDF.parse(date);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return null;
+    public YearMonthDay getCurrentDate() {
+        return new YearMonthDay(mYear, mMonth, mDay);
     }
 
     @Override
@@ -598,6 +590,6 @@ public class WheelDatePicker extends LinearLayout implements WheelPicker.OnItemS
     }
 
     public interface OnDateSelectedListener {
-        void onDateSelected(WheelDatePicker picker, Date date);
+        void onDateSelected(WheelDatePicker picker, YearMonthDay yearMonthDay);
     }
 }
