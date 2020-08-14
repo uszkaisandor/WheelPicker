@@ -48,7 +48,7 @@ public class WheelMonthPicker extends WheelPicker implements IWheelMonthPicker {
         if( mSelectedMonth > 0){
             setSelectedItemPosition(mSelectedMonth - 1);
         }
-        selectedMonthString = data.get(mSelectedMonth);
+        selectedMonthString = data.get(mSelectedMonth - 1);
     }
 
     @Override
